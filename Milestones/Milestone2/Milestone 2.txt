@@ -1,0 +1,29 @@
+return NULL
+Milestone 2
+Task 1
+
+-- All primary needs and features.
+
+* Text input.
+* A main page from which viewers can see a list of articles.
+* Being able to click on an article title from the main page takes the user to a
+	different page that has just the article. We don't want the entirety of all
+	articles being posted on the main page. Probably just the titles.
+* Perhaps a comment section for each article.
+* We want to offer tags that people can apply to their articles so that they
+	can be categorized.
+* We also want people to be able to search for articles based on title and
+	tags.
+* We want people to be able to filter search results according to relevancy and
+	time.
+
+-- A list of requirements, including non-functional requirements.
+
+* Probably a minimum word length for articles so people can't spam a bunch of mini articles.
+* Maybe some sort of word checker to see if a person actually typed words. We don't want
+	"articles"  composed of nothing but "asdfasd asjdfasd asdjhfakd."
+* Some sort of account system. Logged-in users may create articles and comments.
+* Some algorithm to be used when users search for articles based on relevancy.
+	What defines relevancy?
+* Ability to remove articles as we see fit. Maybe someone found a way around the system
+	that checks to make sure people aren't just filling articles with gibberish.

@@ -1,0 +1,19 @@
+[html]Which one of these is <b>not</b> a value of XP? {
+	~Courage
+	~Simplicity
+	~Communication
+	=Speed
+}
+
+[html]Unit tests are only sometimes necessary. {FALSE}
+
+[html]Acceptance tests are performed at the end of each iteration. {TRUE}
+
+[html]Which <b>is</b> a commanment of simplicity {
+	=Passes all test.
+	~Was quick to write.
+	~Refactoring is necessary.
+	~Passing tests is done later.
+}
+
+[html] XP does not use an iterative process.{TRUE}

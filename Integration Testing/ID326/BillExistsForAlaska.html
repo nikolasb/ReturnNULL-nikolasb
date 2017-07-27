@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://eachvoiceapp.azurewebsites.net/" />
+<title>BillOnlyExistsForOneState</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">BillOnlyExistsForOneState</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=BillHub</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>id=state</td>
+	<td>label=Alaska</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=search</td>
+	<td>An Act relating to a veteran's designation on an identification card or a driver's license for Hmong veterans and Lao veterans; relating to special motor vehicle registration plates for recipients of the Bronze Star awarded for valor, Silver Star, Navy Cross, Distinguished Service Cross, Air Force Cross, Coast Guard Cross, and other awards reflecting valor; relating to special request specialty organization registration plates; and providing for an effective date.</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>css=button.btn.btn-default</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertTextPresent</td>
+	<td></td>
+	<td>An Act relating to a veteran's designation on an identification card or a driver's license for Hmong veterans and Lao veterans; relating to special motor vehicle registration plates for recipients of the Bronze Star awarded for valor, Silver Star, Navy Cross, Distinguished Service Cross, Air Force Cross, Coast Guard Cross, and other awards reflecting valor; relating to special request specialty organization registration plates; and providing for an effective date.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

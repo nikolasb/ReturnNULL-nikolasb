@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EachVoice.Models.CustomU.UserComment>
+
+@{
+    ViewBag.Title = "ListCommentsToDeleteOrEdit";
+}
+
+<h2>ListCommentsToDeleteOrEdit</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.blid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.comt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.netuid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bltitle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.blid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.comt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.netuid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bltitle)
+        </td>
+        <td>
+            
+            
+            @Html.ActionLink("Delete", "DeleteComment", new { id=item.id})
+        </td>
+    </tr>
+}
+
+</table>

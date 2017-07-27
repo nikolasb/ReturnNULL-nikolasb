@@ -1,0 +1,442 @@
+<script>
+    var k = '@System.Configuration.ConfigurationManager.AppSettings["ostate"]';
+    //Upper chamber is the Senate. This method grabs all the representatives using the API and then dynamically creates buttons for each representative. Each button has an onclick event added to it.
+    function StateSenateList() {
+        document.getElementById("SenateResults").innerHTML = "";
+        var senateString = 'https://openstates.org/api/v1/legislators/?state=or&chamber=upper&apikey='+k;
+
+        $.getJSON(senateString, function (data)
+        {
+            
+            //An array in which each state senator will be placed.
+            var list = [];
+            //Places each senator into the array.
+            jQuery.each(data,
+                function ()
+                {
+                    list.push(this);
+                });
+            //Sorts the array by last name.
+            list.sort(function (a, b)
+            {
+                if (a.last_name < b.last_name) return -1;
+                if (a.last_name > b.last_name) return 1;
+                return 0;
+            });
+            //Builds buttons for each of the senators.
+            for (i = 0; i < list.length; i++)
+            {
+                document.getElementById("SenateResults").innerHTML += "<input type='button' onclick='ShowRepData(\"" + list[i].leg_id + "\")' value='" + list[i].last_name + ", " + list[i].first_name + "' style='width: 230px;'> <p></p>";
+            }
+        });
+
+        document.getElementById("SeniorSen").innerHTML += "<input type='button' onclick='FedPage(\"1\")' value='Wyden, Ron' style='width: 230px;'> <p></p>";
+        document.getElementById("JuniorSen").innerHTML += "<input type='button' onclick='FedPage(\"2\")' value='Merkley, Jeff' style='width: 230px;'> <p></p>";
+    }
+
+    //Lower chamber is the House of Representatives. This method also grabs representative data using the API.
+    function StateHouseList() {
+        document.getElementById("HouseResults").innerHTML = "";
+        var houseString = "https://openstates.org/api/v1/legislators/?state=or&chamber=lower&apikey="+k;
+        $.getJSON(houseString, function (data) {
+            //An array in which each state senator will be placed.
+            var list = [];
+            //Places each senator into the array.
+            jQuery.each(data,
+                function () {
+                    list.push(this);
+                });
+            //Sorts the array by last name.
+            list.sort(function (a, b) {
+                if (a.last_name < b.last_name) return -1;
+                if (a.last_name > b.last_name) return 1;
+                return 0;
+            });
+            //Builds buttons for each of the senators.
+            for (i = 0; i < list.length; i++) {
+                document.getElementById("HouseResults").innerHTML += "<input type='button' onclick='ShowRepData(\"" + list[i].leg_id + "\")' value='" + list[i].last_name + ", " + list[i].first_name + "' style='width: 230px;'> <p></p>";
+            }
+        });
+        document.getElementById("1stRep").innerHTML += "<input type='button' onclick='FedPage(\"3\")' value='Blumenauer, Earl' style='width: 230px;'> <p></p>";
+        document.getElementById("2ndRep").innerHTML += "<input type='button' onclick='FedPage(\"4\")' value='Bonamici, Suzanne' style='width: 230px;'> <p></p>";
+        document.getElementById("3rdRep").innerHTML += "<input type='button' onclick='FedPage(\"5\")' value='DeFazio, Peter' style='width: 230px;'> <p></p>";
+        document.getElementById("4thRep").innerHTML += "<input type='button' onclick='FedPage(\"6\")' value='Schrader, Kurt' style='width: 230px;'> <p></p>";
+        document.getElementById("5thRep").innerHTML += "<input type='button' onclick='FedPage(\"7\")' value='Walden, Greg' style='width: 230px;'> <p></p>";
+    }
+    
+    //hides all voting UI, called by other methods to control when this UI is shown to the user
+    function hideVoteStuff(data) {
+        if (data.isLoggedIn == 0) {
+            document.getElementById("progress").hidden = true;
+            document.getElementById("voteButtons").hidden = true;
+        }
+        else {
+            document.getElementById("progress").hidden = false;
+            document.getElementById("voteButtons").hidden = false;
+        }
+    }
+
+    //this method calls the API to access the representatives specific data such as phone numbers, addresses, and contatct information.
+    function ShowRepData(legID) {
+        var dataString = 'https://openstates.org/api/v1/legislators/' + legID + '/?apikey=' + k;
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "Home/isUserLoggedIn",
+            success: hideVoteStuff
+        });
+        document.getElementById("progress").hidden = false;
+        document.getElementById("repIDHolder").textContent = legID;
+        //document.getElementById("repNameHolder").textContent=;
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: dataString,
+            success: DisplayRepData
+        });
+    }
+
+    //Sets all of the html placeholders with the data gathered from the ShowRepData method
+    function DisplayRepData(data) {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/Home/isUserLoggedIn",
+            success: hideVoteStuff
+        });
+        document.getElementById("FirstName").innerHTML = data.first_name;
+        document.getElementById("LastName").innerHTML = data.last_name;
+        document.getElementById("District").innerHTML = data.district;
+        document.getElementById("progress").hidden = false;
+        document.getElementById("voteButtons").hidden = false;
+        DisplayVotes();
+        //Email
+        document.getElementById("Email").innerHTML = "N/A";
+        if (data.email != null && data.email != "" && data.email != " ") {
+            document.getElementById("Email").innerHTML = data.email;
+        }
+
+        //Working Test
+
+        var str = JSON.stringify(data.offices);
+        var strAr = str.split(":");
+
+        //OfficeType
+        var officeType = strAr[5];
+        if (officeType.charAt(0) == "n") {
+            officeType = "N/A";
+        }
+        else {
+            officeType = officeType.substring(1, officeType.length - 9);
+        }
+
+        //OfficeAddressName
+        var officeAddressName = strAr[2];
+        if (officeAddressName.charAt(0) == "n") {
+            officeAddressName = "N/A";
+        }
+        else {
+            officeAddressName = officeAddressName.substring(1, officeAddressName.length - 9);
+        }
+
+        //OfficeAddress
+        var officeAddress = strAr[4];
+        if (officeAddress.charAt(0) == "n") {
+            officeAddress = "N/A";
+        }
+        else {
+            officeAddress = officeAddress.substring(1, officeAddress.length - 26) + "<br>" + officeAddress.substring(25, officeAddress.length - 8);
+        }
+
+        //OfficePhone
+        var officePhone = strAr[3];
+        if (officePhone.charAt(0) == "n") {
+            officePhone = "N/A";
+        }
+        else {
+            officePhone = officePhone.substring(1, officePhone.length - 11);
+        }
+
+        //OfficeFax
+        var officeFax = strAr[1];
+        if (officeFax.charAt(0) == "n") {
+            officeFax = "N/A";
+        }
+        else {
+            officeFax = officeFax.substring(1, officeFax.length - 7);
+        }
+
+        //OfficeEmail
+        var officeEmail = strAr[6];
+        if (officeEmail.charAt(0) == "n") {
+            officeEmail = "N/A";
+        }
+        else {
+            officeEmail = officeEmail.substring(1, officeEmail.length - 3);
+        }
+
+        document.getElementById("FirstNamePlacement").innerHTML = "First Name<br>";
+        document.getElementById("LastNamePlacement").innerHTML = "Last Name<br>";
+        document.getElementById("EmailPlacement").innerHTML = "Email<br>";
+        document.getElementById("DistrictPlacement").innerHTML = "District<br>";
+        document.getElementById("OfficePositionPlacement").innerHTML = "Office Position<br>";
+        document.getElementById("OfficeAddressNamePlacement").innerHTML = "Office Address Name<br>";
+        document.getElementById("OfficeAddressPlacement").innerHTML = "Office Address";
+
+        document.getElementById("OfficeAddress1").innerHTML = officeType + "<br>";
+        document.getElementById("OfficeAddress1").innerHTML += officeAddressName + "<br>";
+        document.getElementById("OfficeAddress1").innerHTML += officeAddress + "<br>";
+        document.getElementById("OfficeAddress1").innerHTML += "Phone: " + officePhone + "<br>";
+        document.getElementById("OfficeAddress1").innerHTML += "Fax: " + officeFax + "<br>";
+        document.getElementById("OfficeAddress1").innerHTML += "Email: " + officeEmail + "<br>";
+        document.getElementById("OfficeAddress2").innerHTML = "<br>";
+        document.getElementById("OfficeAddress3").innerHTML = "<br>";
+        document.getElementById("OfficeAddress4").innerHTML = "<br>";
+        document.getElementById("OfficeAddress5").innerHTML = "<br>";
+        document.getElementById("OfficeAddress6").innerHTML = "<br>";
+        document.getElementById("OfficeAddress7").innerHTML = "<br>";
+
+        //Photo
+        document.getElementById("Photo").innerHTML = "";
+        if (data.photo_url != null) {
+            document.getElementById("Photo").innerHTML = "<img src=\"" + data.photo_url + "\" alt=\"Representative_Photo\" style=\"width:115px; height:130px;\" />";
+        }
+        var repName = data.first_name + " " + data.last_name;
+        document.getElementById("repNameHolder").textContent = repName;
+    }
+    //Creates the buttons and information for each federal representative
+    function FedPage(fedID)
+    {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: "/Home/isUserLoggedIn",
+            success: hideVoteStuff
+        });
+        document.getElementById("FirstNamePlacement").innerHTML = "First Name<br>";
+        document.getElementById("LastNamePlacement").innerHTML = "Last Name<br>";
+        document.getElementById("EmailPlacement").innerHTML = "Email<br>";
+        document.getElementById("DistrictPlacement").innerHTML = "";
+        document.getElementById("District").innerHTML = "";
+        document.getElementById("OfficePositionPlacement").innerHTML = "";
+        document.getElementById("OfficeAddressNamePlacement").innerHTML = "";
+        document.getElementById("OfficeAddressPlacement").innerHTML = "Office Address(es)";
+
+        if (fedID == 1 || 2 || 3 || 4 || 5 || 6 || 7)
+        {
+            document.getElementById("LastName").innerHTML = "<br>";
+            document.getElementById("Email").innerHTML = "<br>";
+            document.getElementById("OfficeAddress1").innerHTML = "<br>";
+            document.getElementById("OfficeAddress2").innerHTML = "<br>";
+            document.getElementById("OfficeAddress3").innerHTML = "<br>";
+            document.getElementById("OfficeAddress4").innerHTML = "<br>";
+            document.getElementById("OfficeAddress5").innerHTML = "<br>";
+            document.getElementById("OfficeAddress6").innerHTML = "<br>";
+            document.getElementById("OfficeAddress7").innerHTML = "<br>";
+        }
+        if (fedID == 1) {
+            $('#FirstName').load("/Resources/Wyden.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/WydenR.jpg\" />";
+        }
+        if (fedID == 2) {
+            $('#FirstName').load("/Resources/Merkley.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/MerkleyJ.jpg\" />";
+        }
+        if (fedID == 3) {
+            $('#FirstName').load("/Resources/Blumenauer.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/BlumenauerE.jpg\" />";
+        }
+        if (fedID == 4) {
+            $('#FirstName').load("/Resources/Bonamici.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/BonamiciS.jpg\" />";
+        }
+        if (fedID == 5) {
+            $('#FirstName').load("/Resources/DeFazio.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/DeFazioP.jpg\" />";
+        }
+        if (fedID == 6) {
+            $('#FirstName').load("/Resources/Schrader.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/SchraderK.jpg\" />";
+        }
+        if (fedID == 7) {
+            $('#FirstName').load("/Resources/Walden.txt");
+            document.getElementById("Photo").innerHTML = "<img src=\"/Resources/WaldenG.jpg\" />";
+        }
+    }
+
+    var approveCount = 0;
+    var disapproveCount = 0;
+    //this function displays the votes each representative has
+    function DisplayVotes() {
+        document.getElementById("approveBar").innerHTML = " " + approveCount + " approval votes";
+        document.getElementById("disapproveBar").innerHTML = " " + disapproveCount + " disapproval votes";
+
+        var totalVotes = approveCount + disapproveCount;
+        approvePercentage = (approveCount / totalVotes) * 100;
+        disapprovePercentage = (disapproveCount / totalVotes) * 100;
+        document.getElementById("approveBar").style.width = approvePercentage + "%";
+        document.getElementById("disapproveBar").style.width = disapprovePercentage + "%";
+    }
+    // vote = 1 for approve, 0 for disapprove
+    function DoVote(vote) {
+        console.log("Doing vote " + vote);
+        var legID = document.getElementById("repIDHolder").textContent;
+        var repName = document.getElementById("repNameHolder").textContent;
+        console.log("rep name is " +repName);
+        console.log(legID);
+        $.ajax({
+            url: '/Home/VoteEntry?legID=' + legID + '&RepName=' + repName + '&Approval=' + vote,
+            type: 'POST',
+            success: function (data) {
+                approveCount = data.approve;
+                disapproveCount = data.disapprove;
+                DisplayVotes();
+            },
+            error: function () { console.log("SOMETHING BROKEN"); }
+        });
+    }
+    //updates the vote count of the representatives
+    function UpdateRepVotes() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: '/Home/RepVoteCount?legID=' + legID,
+            success: function (data) {
+                approveCount = data.approve;
+                disapproveCount = data.disapprove;
+                DisplayVotes();
+            },
+            error: function () { console.log("SOMETHING BROKEN"); }
+        });
+    }
+</script>
+
+@{
+    ViewBag.Title = "RepHub";
+}
+
+<body onload="StateSenateList(); StateHouseList(); testXMLtoJSON()"></body>
+
+<body>
+    <p></p>
+    <div class="row">
+        <div class="col-sm-4">
+            @*State Senate*@
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">State Senate</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body" align="center">
+                            <div id="SenateResults"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Federal Senate*@
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse2">Federal Senate</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body" align="center">
+                            <b>Senior Senator</b><br />
+                            <div id="SeniorSen"></div>
+                            <b>Junior Senator</b><br />
+                            <div id="JuniorSen"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*State House of Representatives*@
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse3">State House of Representatives</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body" align="center">
+                            <div id="HouseResults"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*Federal House of Representatives*@
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse4">Federal House of Representatives</a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body" align="center">
+                            <div id="1stRep"></div>
+                            <div id="2ndRep"></div>
+                            <div id="3rdRep"></div>
+                            <div id="4thRep"></div>
+                            <div id="5thRep"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            @*Put the approval/disapproval bar here, within this column.*@
+            <div class="progress" id="progress" hidden>
+                <div class="progress-bar progress-bar-success" role="progressbar" id="approveBar" style="width:50%">
+                </div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" id="disapproveBar" style="width:50%">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div id="Photo"></div>
+                <div id="voteButtons" hidden>
+                    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-secondary" onclick="DoVote(0)"><span class="label label-success"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></span></button>
+                        <button type="button" class="btn btn-secondary" onclick="DoVote(1)"><span class="label label-danger"> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div id="FirstNamePlacement"></div>
+                <div id="LastNamePlacement"></div>
+                <div id="DistrictPlacement"></div>
+                <div id="EmailPlacement"></div>
+
+                <h2></h2>
+                <div id="OfficePositionPlacement"></div>
+                <div id="OfficeAddressNamePlacement"></div>
+                <div id="OfficeAddressPlacement"></div>
+            </div>
+            <div class="col-sm-4">
+                <div id="FirstName"></div>
+                <div id="LastName"></div>
+                <div id="District"></div>
+                <div id="Email"></div>
+                <h2></h2>
+                <div id="OfficeAddress1"></div>
+                <div id="OfficeAddress2"></div>
+                <div id="OfficeAddress3"></div>
+                <div id="OfficeAddress4"></div>
+                <div id="OfficeAddress5"></div>
+                <div id="OfficeAddress6"></div>
+                <div id="OfficeAddress7"></div>
+                <div id="feedbackBar"></div>
+            </div>
+        </div>
+    </div> 
+    <p id="repIDHolder" hidden></p>
+    <p id="repNameHolder" hidden></p>
+</body>

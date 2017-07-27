@@ -1,0 +1,47 @@
+﻿@model EachVoice.Models.CustomU.UserComment
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>UserComment</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.HiddenFor(model => model.blid)
+        </dt>
+        <dt>
+            @Html.HiddenFor(model => model.netuid)
+        </dt>
+        <dt>
+            Title
+        </dt>
+
+        <dd>
+            @Model.bltitle
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.comt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.comt)
+            
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index","Manage")
+        </div>
+    }
+</div>

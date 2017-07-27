@@ -1,0 +1,10 @@
+Needs and Features:
+-Accounts
+	-Login/Logout
+	-Database records
+-Gather government info (this is a huge undertaking)
+-Website Layout
+	-Different sections/views
+	-User Home page with location specific information
+-Feedback systems
+-Filter information (bills, representitives, ect.) by zip code/district

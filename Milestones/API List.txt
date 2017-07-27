@@ -1,0 +1,49 @@
+
+
+
+Google
+----------------
+https://developers.google.com/civic-information/docs/v2/
+- Minimal. Representatives and voting places.
+
+
+
+Oregon State Legislature
+----------------
+https://www.oregonlegislature.gov/citizen_engagement/Pages/data.aspx
+- Possibly can't use. Need to contact them.
+
+
+
+Oregon.gov Open Data
+----------------
+https://data.oregon.gov/
+- Possibly not the information that we want.
+
+
+
+Open States
+----------------
+http://docs.openstates.org/en/latest/api/
+- Can get data on any state
+
+
+
+Sunlight Congress
+----------------
+https://sunlightlabs.github.io/congress/index.html
+- Can get lots of data but only federal things
+
+
+
+Pro Republica
+---------------
+https://propublica.github.io/congress-api-docs/#congress-api-documentation
+- Only federal stuff, but lots of data!
+
+
+
+OpenStates
+---------------
+http://docs.openstates.org/en/latest/api/
+- Lots of good stuff here!

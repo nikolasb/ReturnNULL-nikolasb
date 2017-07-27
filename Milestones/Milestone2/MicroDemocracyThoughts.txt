@@ -1,0 +1,70 @@
+Goal of app
+Give constituents more direct influence over their governemnt, and the information and tools necessary to make informed decisions about issues and representatives.
+1. Aggregate information.
+2. Give voters more influence of their government. 
+
+
+
+
+
+
+
+--- Types of users
+Voter 
+Symbolic Representatives - A 'digital' representative in the voting system of the app
+Concrete Representative - A real life representative in our current government
+
+
+
+
+
+
+
+
+---  User stories
+As a TYPE OF USER I want SOME GOAL so that SOME REASON.
+
+
+
+
+
+
+
+--- Feature Ideas (general / small)
+
+- Communal bill / law drafting. Allow anybody to create a bill. Users can submit changes and edits which must be approved. Something like wikipedia except for drafting bills (with a similar drafting process).
+
+- Allow representatives to ask questions and poll their constituents in real time. Representative questions are sent immediately to phones get a quick immediate opinions.
+
+- History of bills. Voters want to easily see the history of a bill. When was it drafted? What changes were made by who and when? Who voted for or against the bill? 
+
+- Quick human readable summaries of bills / laws. 
+
+- Compilation of many varying opinions from different sources for and against 
+
+- History of representatives. Where did they work? Who gave them money? What did they vote for or against? 
+
+- In app voting system. Every members gets 100 votes to allocate across any issue. The member can give their votes to a representative, which then representative can then vote on. Any number of votes can be given for or against any issue. 
+(Can votes be moved? If so how many times? How long must they stay allocated to a certain issue?)
+
+
+
+
+
+
+
+
+
+--- BIG feature ideas
+
+- Bill / Law Hub
+			Provides information on bills and laws. Opinions from varying sources on the bill. Current status and roadmap of the bill. History of the bill. Who voted for or against and when. What changes were made by who and when. Proposed changes to the bill and by who. Human readable summaries of the bill. Upcoming changes to laws, and who it was purposed by. 
+
+- Virtual Voting Simulation
+			In app custom system of voting. Users can vote on issues and representatives. This gives real world representatives more data on the opinions of their constituents.
+
+- Representative Features and Accounts
+			Representatives must verify their identity. Allow representatives to gather quick, real time opinions from their constituents. Verified representatives can create polls and ask questions which will then notify their constituents phones to gather a quick opinion at any time.
+
+- Communal Bill Drafting
+			Users can draft and submit changes to bills in a wikipedia and google docs style.

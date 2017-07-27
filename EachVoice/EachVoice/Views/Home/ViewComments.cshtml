@@ -1,0 +1,41 @@
+﻿@model IEnumerable<EachVoice.Models.CustomU.UserComment>
+
+    @{ViewBag.Title = "ViewComments"; }
+      <h3 class="text-danger">@ViewBag.Message</h3>
+    
+   
+        <h2>ViewComments</h2>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.comt)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.bltitle)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.comt)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m=>item.bltitle)
+                    </td>                    
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id=item.id })                         
+                        @Html.ActionLink("Delete", "Delete", new {id = item.id })
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+    
+
+    
+

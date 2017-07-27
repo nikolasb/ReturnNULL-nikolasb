@@ -1,0 +1,264 @@
+Extreme Programming
+Matherin Langely · Ryan Rothweiler
+ZhenDong Ma · Nikolas Beltran 
+Zhen
+
+Encyclopedia Britannica
+FAST Enterprises
+
+Extreme Programming	
+Extreme Programming: 
+A Software Development Methodology
+A type of agile development.
+It has short development lifecycle.
+This is used to implement and improve productivity for the customers require.
+Traditional ‘good’ programming practices taken to the extreme.
+
+Zhen
+
+Extreme programming is doing everything you know you should be doing, but taken to the extreme so you always do it all the time.
+Always pair programming. Always unit testing. Always integration testing.
+
+"Extreme" means these practices get "turned up" to a much higher "volume" than on traditional projects. XP ignores any other practice (like BigDesignUpFront) that does not appear on the list. The result is stable, productive, and very rapid because the practices support each other the more they are used together without interference. An Extreme project is typically so stable and sedate it can lead to FortyHourWeeks without any schedule slips.
+
+Extreme Programming
+Doing everything you know you should be doing, but taken to the extreme so you always do it all the time.
+Always pair programming.
+Always unit testing. 
+Always integration testing.
+
+"Extreme" means these practices get "turned up" to a much higher "volume" than on traditional projects. 
+XP ignores any other practice (like BigDesignUpFront) that does not appear on the list. 
+The result is stable, productive, and very rapid because the practices support each other the more they are used together without interference. 
+
+
+Simplicity
+Communication
+Feedback
+Respect
+Courage
+
+Values of XP
+Zhen
+It IS A SOFTWARE DEVELOPMENT methodology, it is short development lifecycle used to implement and improve productivity for the customers require
+
+Rules of Extreme Programming
+Planning 
+ User stories are written.
+ Release schedule created.Frequent small releases.
+ The project is divided into iterations. Iteration planning starts each iteration
+Managing: 
+open work space.
+Sustainable pace. 
+Stand up meeting 
+Project Velocity 
+Move people around. 
+Fix XP when it breaks.
+Designing: 
+Simplicity
+Use CRC cards
+Refactor
+
+
+Coding:
+Customers always available.
+Be standard. 
+Unit Testing
+Pair Programmed.
+Integrates code at a time
+Testing:
+ All code must have unit tests. 
+Pass unit tests before released.
+Tests are created when bug is found.
+
+Zhen
+Rules are based on the values. Planning User stoories are written. Release planning creates the release schedule.make frequent small releases. The project is divided into iterations. Iteration planning starts each iteration
+Managing: open work space. Sustainable pace. Stand up meeting Project Beloctiy Move people around. Fix XP when it breaks.
+Designing: simplicity.Use CRC cards.Spkie solutions. Refactor.
+Coding:customer  Always available. Be standards. Unit test first. Pair programmed.Itegrates code at a time. Integrate often.
+Testing All code must have nit tests. Pass unit tests before released. Tests are created when bug is found.
+
+2 person working at one single computer at the same time, there are 2 rolls, navigator and observer, if it does well means less mistake was made and cost business less, one person learn from the other, then,  the roll switch. new ideas are encouraged and the code is produced.
+Zhen
+
+Pair Programming
+This technique is where two programmers work together at one workstation. One, the driver, writes code while the other, the observer, reviews each line of code as it is typed
+The two programmers switch roles frequently
+Benefits
+Economics
+Satisfaction
+Design Quality
+Continuous Reviews
+Learning
+Team Building and Communication
+Staff and Project Management
+Weaknesses
+Does not work for all programmers. 
+Not reasonable when distance is a factor.
+Assumes lack of developer egos and high willingness to cooperate
+Large developer skill gap can lead to many problems
+Zhen
+it is a method, that 2 person working at one single computer at the same time, there are 2 rolls, navigator and observer, if it does well means less mistake was made and cost business less, one person learn from the other, then,  the roll reverse switch. new ideas are encouraged and the code is produced.
+
+Stories and Test/Requirement-Driven Development
+Matherin
+
+Stories and Test/Requirement-Driven Development
+Project requirements are laid out as stories that have test cases.
+A project is done in iterations.
+Acceptance tests are performed at the end of each iteration.
+Matherin
+
+Code Review
+This is continuous approach of improvement, used to increase more efficient and clean code.
+Code reviews allow programming patterns to be maintained and enforced which leads to increased readability, efficiency, and maintainability of code.
+Matherin
+
+Code Review
+It gives the programmer continuous feedback
+Code reviews usually include review team, every so often, coming in to analyze the code. 
+This forcers any new programmers to be more aware of the bad habits they may have leading to more efficient code
+
+
+Matherin
+
+Unit testing:
+Unit testing is a testing process that breaks the parts of the application into individual “units” to be tested independently for proper behavior. This is generally automated.
+Easy to test making the program have a higher number of small focus function which is always a benefit
+
+Matherin
+
+Matherin
+
+Unit Testing:
+Each unit has a smallest testable part.
+It helps to identify failure of code logic.
+Helps identify small easily fixable problems before they become large and expensive.
+Matherin
+
+Ryan
+
+I am going to talk about integration testing
+
+
+Integration testing
+It is an approach where individual modules are combined and tested as a group.
+Once two separate parts of the software are completed, they are brought together and tested as a whole.
+
+
+Ryan
+Bring smaller pieces together into one piece
+Test make sure interfaces between the components work as intended.
+
+Ryan
+
+Ryan
+
+Integration testing
+So this leaves no mistakes, it is the same with making a movie and your scene is added and you played the movie from the start to see if it is working as expected
+It significantly lowers the risk of failure and makes sure everything is working together as a whole.
+Top down / bottom up
+Ryan
+
+Much like making a movie.
+Two approaches
+Top Down. Starting with highest level first and moving down into the unit tests.
+Bottom Up. Starts with Unit testing. Make sure each unit is working as intended. Then build up larger and larger test from there. 
+Usually both are done. Starting with bottom up, once all those pass then top down testing is done.
+
+Ryan
+
+
+Ryan
+
+
+Courage
+This comes into play when important decision need to be made 
+To change the direction of the project by discarding incorrect decisions.
+Not being afraid to make the right decision instead of the easiest or cheapest.
+
+Ryan
+Having the courage to make the difficult decisions. 
+Having the courage to adapt to changing project specifications.
+Manifests in many ways. 
+
+Courage
+The team usually has to take responsibility to get rid of code which is no longer useful. 
+Courage to adapt to changing project requirement.
+Possible since you are never working alone.
+Ryan
+Not being afraid to throw way code.
+Admitting when you’re wrong.
+Having the courage to learn something new
+Courage to say no.
+Courage to focus only on what is necessary.
+Courage to tell the truth about progress
+Realize that you are never working alone and that you can always get support
+
+Sustainable Pace
+Work on the appropriate number of items per iteration.
+Well-rested programmers produce better code.
+More working hours does not equal more work done.
+Programmer welfare is important and necessary for successful products.
+
+http://www.extremeprogramming.org/rules/overtime.html
+
+Productivity drops between 5 and 6 hours per day, just shy of 40 hours a week. Productivity does not reset each new week.
+
+Keep amount of hours worked consistent per iteration.
+
+Consistency helps the team find their perfect project velocity.
+
+Simplicity
+Simple code is better than complex code.
+Simple is subjective.
+Four subjective qualities:
+Testable
+Browsable
+Understandable
+Explainable
+
+http://www.extremeprogramming.org/rules/simple.html
+
+YAGNA (You Aren’t Gonna Need It)
+Only write what you actually need right this moment. 
+Don’t write what you think you’re going to need.
+Refrain from adding extra functionality.
+Only 10% of extra stuff will be used.
+Constraints will change, so keep your code flexible.
+
+http://www.extremeprogramming.org/rules/early.html
+
+https://www.safaribooksonline.com/library/view/extreme-programming-pocket/9781449399849/ch18.html
+
+Problems with Extreme Programming
+Having an on-site customer who proposes changes can lead to costly rework and scope creep.
+Developers are usually required to work in pairs. 
+XP only works with twelve or fewer people, although some groups have claimed success with larger numbers.
+
+Applications of Extreme Programming
+Extreme Programming is suitable for projects that 
+involve new technology or rapidly changing requirements
+are research projects
+are small and easily managed
+Traditional methodologies are suitable for projects that 
+involve stable technology and have fixed requirements
+involve mission critical or safety critical mission
+are large projects
+have complex products that continue beyond the project scope
+1:  or require development to discover unforeseen implementation problems.
+2: Are research projects, where the resulting work is not the software product itself, but domain knowledge
+3: Are small and more easily managed through informal methods
+
+Involve stable technology and have fixed requirements, where it is known that few changes will occur
+Involve mission critical or safety critical systems, where formal methods must be employed for safety or insurance reasons
+Are large projects which may overwhelm informal communication mechanisms
+Have complex products which continue beyond the project scope to require frequent and significant alterations, where a recorded knowledge base, or documentation set, becomes a fundamental necessity to support the maintenance
+
+ Remember to mention Encyclopedia Britannica and FAST Enterprises
+
+Conclusion
+Less of a rigorous series of steps and more just a collection of best practices.
+Best practices are always strictly enforced.
+Best practices taken to the extreme.
+

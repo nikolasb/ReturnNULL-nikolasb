@@ -1,0 +1,5 @@
+Arrticle Fibs is a website for people who want to test out their creative writing skills by posting fake new articles. 
+Once published, the website will provide an official looking format for the text the users entered (headers, body, etc.).
+The website will present the articles in a fashion that gives off the impression that it is a real and reliable 
+news website. Unlike other websites that mix in fake news articles with real ones, this website will be dedicated 
+to the creative work of users.

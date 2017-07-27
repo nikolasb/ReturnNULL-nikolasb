@@ -1,0 +1,10 @@
+Class Project User Stories:
+1. As a website editor, I want to be able to remove spam and delete articles.
+2. As an amatuer writer, I want a platform to practice my writing skills that is easy to use.
+3. As a writing professor, I want a website where my students can free write and save those writings whilst also being able to
+view one another's articles.
+4. As an aspiring sports writer, I want a website that allows me to practice and showcase my various works.
+5. As a website admin, I want to be able to view basic data such as # of articles and in which areas so as to gain more
+more information about my users.
+6. As a website moderator, I want to be able to timeout users and delete accounts.
+7. As a website maintainer, I want to be able to correct tags and reassign articles accordingly.

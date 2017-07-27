@@ -1,0 +1,9 @@
+Our web application, MicroDem, is designed to help bring together information 
+on local and state government matters to help the public more efficiently
+aquire this information to better understand and vote in these matters.
+We are providing a way for voters to easily access and educate themselves on
+very current topics. This includes proposed local bill, laws, and 
+representatives. Voters will be able to provide input on these topics.
+This combination of information agrigation and voter influence does not
+currently exist. We hope to provide a place where voters can start to 
+become more active in and better educated about their local government. 

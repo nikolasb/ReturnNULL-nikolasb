@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1 id="title" align="center">Each Voice</h1>
+<div class="row">
+    <div class="col-lg-1 col-lg-1">
+        <a id="handsImage">
+            <img src="~/Content/Images/raised-hands.jpg" width="1150" height="400" alt="raised hands clip art" />
+        </a>
+    </div>
+</div>
+<!--What is Each Voice? Panel group-->
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse1">What is Each Voice?</a>
+            </h4>
+        </div>
+        <div id="collapse1" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>
+                    <b>Each Voice</b> is a project geared towards getting everyone involved in their local governments. America's democracry is dependent on the populations participation. The beauty of our democracy is that we have an incredible amount of power collectively. However, in recent years, voter turnout and participation has fallen to a disturbingly low number. The most recent presidential election in the United States saw a twenty-year low in voter participation at a measely 55.4%. Close to <b>half</b> of our population is simply choosing to not participate.
+                </p>
+                <ul>
+                    Voter turnout can be tied to a number of factors, but the ones Each Voice aims to tackle are as follows:
+                    <li>Lack of knowledge on particular candidates</li>
+                    <li>Lack of understanding new laws and proposed legislation</li>
+                    <li>Providing information on issues and candidates from a nuetral standpoint</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Getting started with BillHub Panel group-->
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse2">Getting started with BillHub</a>
+            </h4>
+        </div>
+        <div id="collapse2" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p>
+                    Our <b>BillHub</b> allows you to search for and view various legislation as it goes through its democratic life cycle. We present raw facts about each piece of legislation and aim to provide you with enough information to be able to do more research and/or come to a well-informed opinion.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Representative information Panel group-->
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse3">Representative Information</a>
+            </h4>
+        </div>
+        <div id="collapse3" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p><b>Each Voice</b> offers a wealth of information regarding your representatives. We have data and information on every active representative in Oregon compiled into one place. We also provide contact information for you to get in touch with your representative. If you aren't sure who your local representatives are, no problem! Hit the button below to get started.</p>
+                <button id="geolocation">Find My Representatives</button>
+                <ul id="reps" hidden>
+                    <li>Your federal representatives can be found @Html.ActionLink("here", "RepHub", "Home")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+    </div>
+</div>
+
+<!--Why are you using my location Panel Group-->
+<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapse4">Why are you using my location?</a>
+            </h4>
+        </div>
+        <div id="collapse4" class="panel-collapse collapse">
+            <div class="panel-body">
+                <p><b>Each Voice</b> uses your browser's ability to detect your location. We <strong>only</strong> use this information to determine who your local representatives are. We do not store this information nor do we share it or make it visible anywhere. We value the upmost privacy of our users.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section LocationScript
+{
+    <script type="text/javascript" src="~/Scripts/GetUserLocation.js"></script>
+}
+@section IndexStyleSheet
+{
+    <script rel="stylesheet" type="text/css" src="~/Content/IndexStyleSheet.css">
+    </script>
+}

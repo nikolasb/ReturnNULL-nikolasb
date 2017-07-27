@@ -1,0 +1,10 @@
+--******************************** Tear Down ********************************** 
+drop table if exists [dbo].[RepVotes]
+drop table if exists [dbo].[UserVotes]
+drop table if exists [dbo].[UserComments]
+drop table if exists [dbo].[Event]
+drop table if exists [dbo].[AspNetUserClaims]
+drop table if exists [dbo].[AspNetUserLogins]
+drop table if exists [dbo].[AspNetUserRoles] 
+drop table if exists [dbo].[AspNetRoles]
+drop table if exists[dbo].[AspNetUsers]

@@ -1,0 +1,242 @@
+﻿
+<script>
+    var billID = '@ViewBag.BillID';
+    var approveCount = 0;
+    var disapproveCount = 0;
+    var k = '@System.Configuration.ConfigurationManager.AppSettings["ostate"]';
+    function FillPage() {
+        $.ajax({
+            type: "GET",
+            dataType: "json",
+            url: 'https://openstates.org/api/v1/bills/' + billID + '/?apikey='+k,
+            success: DisplayData
+        });
+
+        $.ajax({
+            type: 'POST',
+            //url: "http://localhost:53764/Home/Vote?bill_id=" + billID + "&votebit",
+            url: '/Home/Vote?bill_id=' + billID + '&votebit',
+            success: function (data)
+            {
+                approveCount = data.approve;
+                disapproveCount = data.disapprove;
+                DisplayVotes();
+            }
+        });
+    }
+
+    function DisplayData(data) {
+
+        // all events
+        for (index = 0; index < data.actions.length; index++) {
+            var eventDate = new Date(data.actions[index].date);
+            var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+            document.getElementById("EventsBody").innerHTML += '<b>' + monthNames[eventDate.getMonth()] + ' - ' + eventDate.getDay() + ' - ' + eventDate.getFullYear() + '</b> <article class="panel panel-info panel-outline">' + data.actions[index].action + '</article>';
+        }
+
+        // all versions
+        for (index = 0; index < data.versions.length; index++) {
+            document.getElementById("VersionsBody").innerHTML += '<tr>';
+            document.getElementById("VersionsBody").innerHTML += '<th> <a href="' + data.versions[index].url + '">' + data.versions[index].name + '</a> </th>';
+        }
+
+
+        // big milestones
+        var passedLower = '<span class="label label-danger">Did Not Pass Senate</span>';
+        if (data.action_dates.passed_lower != null) {
+            passedLower = '<span class="label label-success">Passed Senate</span>';
+        }
+        document.getElementById("Milestones").innerHTML += passedLower;
+
+        var passedUpper = '<span class="label label-danger">Did Not Pass House</span>';
+        if (data.action_dates.passed_upper != null) {
+            passedUpper = '<span class="label label-success">Passed House</span>';
+        }
+        document.getElementById("Milestones").innerHTML += passedUpper + " ";
+    }
+
+    function DisplayVotes() {
+        document.getElementById("approveBar").innerHTML = " " + approveCount + " approval votes";
+        document.getElementById("disapproveBar").innerHTML = " " + disapproveCount + " disapproval votes";
+
+        var totalVotes = approveCount + disapproveCount;
+        approvePercentage = (approveCount / totalVotes) * 100;
+        disapprovePercentage = (disapproveCount / totalVotes) * 100;
+        document.getElementById("approveBar").style.width = approvePercentage + "%";
+        document.getElementById("disapproveBar").style.width = disapprovePercentage + "%";
+    }
+
+    // vote = 1 for approve, 0 for disapprove
+    function DoVote(vote) {
+        console.log("Doing vote " + vote);
+
+        $.ajax({
+            url: '/Home/Vote?bill_id=' + billID + '&votebit=' + vote,
+            type: 'POST',
+            success: function (data) {
+                approveCount = data.approve;
+                disapproveCount = data.disapprove;
+                DisplayVotes();
+            },
+            error: function () { console.log("SOMETHING BROKEN"); }
+        });
+    }
+</script>
+
+<body onload="FillPage()">
+</body>
+@{
+    ViewBag.Title = "BillPage";
+}
+
+<div class="page-header">
+    <h1>
+        @Html.Raw(ViewBag.BillTitle)
+    </h1>
+
+@if (Request.IsAuthenticated)
+{
+    <div class="progress">
+        <div class="progress-bar progress-bar-success" role="progressbar" id="approveBar" style="width:50%">
+        </div>
+        <div class="progress-bar progress-bar-danger" role="progressbar" id="disapproveBar" style="width:50%">
+        </div>
+    </div>
+}
+</div>
+
+<div class="col-xs-12 col-md-8">
+    <!-- Versions -->
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse4">Versions</a>
+                </h4>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="VersionsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p></p>
+
+    <!-- Events -->
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse5">Actions</a>
+                </h4>
+            </div>
+            <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <div class="timeline">
+
+                        <div id="EventsBody">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+
+
+    @if (Request.IsAuthenticated)
+    {
+        @model EachVoice.Models.DiscussViewModel
+        ViewBag.Title = "Discussion";
+        <p class="text-danger">@ViewBag.Message</p>
+        <h3>Discussion</h3>
+
+        <hr />
+        foreach (var item in Model.list)
+        {
+            <p>@item.comt</p>
+            <hr />
+        }
+
+
+        using (Html.BeginForm())
+        {
+            Html.AntiForgeryToken();
+
+
+            <div class="form-horizontal">
+                <h4>Add Your Comment</h4>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                        @Html.HiddenFor(model => model.comment.id, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="form-group">
+                        @Html.HiddenFor(model => model.comment.blid, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.comt, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        @Html.TextAreaFor(model => model.comment.comt, new { style = "width:600px" })
+                        @Html.ValidationMessageFor(model => model.comment.comt, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.comment.bltitle, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.HiddenFor(model => model.comment.bltitle, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment.bltitle, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group">
+                    @Html.HiddenFor(model => model.comment.netuid, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.HiddenFor(model => model.comment.netuid, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.comment.netuid, "", new { @class = "text-danger" })
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div>
+            @Html.ActionLink("Home", "Index")
+        </div>
+
+    }
+    else
+    {
+        <h3>Please login to view comments.</h3>
+    }
+
+</div>
+<div class="col-xs-12 col-md-4">
+
+    <h3 id="Milestones"></h3>
+
+    <hr />
+
+@if (Request.IsAuthenticated)
+{
+    <div class="btn-group btn-group-lg" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary" onclick="DoVote(0)"><span class="label label-success"> <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> Approve</span></button>
+        <button type="button" class="btn btn-secondary" onclick="DoVote(1)"><span class="label label-danger"> <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> Disapprove</span></button>
+    </div>
+}
+
+</div>

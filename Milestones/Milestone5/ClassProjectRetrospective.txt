@@ -1,0 +1,42 @@
+Class Project Retrospective
+
+1. Conduct a Safety Check
+
+Everyone feels safe. There isn't the feel to filter any ideas or comments. 
+We're all really open with our thoughts and feel that everyone values our 
+comments. We all feel like we are a four on the Safety Gradiant Table.
+
+2. What did you learn from the Sprint?
+
+Mattherin feels that pulling often from the repository is very important.
+
+Ryan thinks that we need to overestimate more for our tasks. He feels that
+when we actually started on the tasks that they felt larger than we expected
+them to be. Also, remembering to create a new branch for our work. We all
+at time forgot to do that.
+
+Nikolas seconds the pulling. He also stressed the importance of getting into
+a rhythm in order to not mess things up. 
+
+Zhendong was the one who tried to fix the site when it went down. He says 
+that two unrelated things/separate projects cannot be merged together, at
+least not without changing some settings if that's even possible. 
+
+3. What still puzzles you?
+
+We all feel that there's an element of unknown with Git. We feel uneasy
+doing pulls. We hope that we don't break things. 
+
+Figuring out the quirks of VSTS. 
+
+4. What can the team do better next Sprint? Make a specific action plan.
+
+Finding more time in the middle of the week to meet up is something
+we need to start doing. We've been meeting up on the weekends, 
+specifically on Sunday. That's too late. We'll better plan, but it's
+hard with our different schedules. 
+
+5. Are there any itmes that need to be brought up with someone outside the
+team?
+
+Ryan wants to know how Dr. Morse is going to grade mid-Sprint. 
