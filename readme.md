@@ -5,11 +5,7 @@ Western Oregon University. These courses are part of a three-course
 series, beginning with CS460, that are the capstone courses 
 required for a BS in Computer Science.
 
-Guidelines to Contributing
-
-Setup: To start contributing you will need to fork our repo at www.bitbucket.org/RyanRothweiler/ReturnNULL and get your local repository working and setup. 
-
-Workflow:
+The website can be viewed here: http://eachvoiceapp.azurewebsites.net
 
 # Each Voice Vision Statement
 
@@ -34,7 +30,7 @@ and state governments.
 
 # Status
 
-We are currently just starting the project.
+This project has been completed.
 
 # Building
 
